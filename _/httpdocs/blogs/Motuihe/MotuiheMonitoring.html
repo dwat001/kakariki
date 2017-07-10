@@ -1,0 +1,543 @@
+﻿<!DOCTYPE html >
+<html>
+<head>
+	<title>Blog - Kakariki - Motuihe Monitoring</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="optimizations java merdgesort" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" />
+	
+    <link href="../css/screen.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]> 
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style>
+#map-canvas {
+    width: 1000px; 
+    height: 800px
+}
+
+#floating-image {
+    height:10;
+    width:10;
+    position:absolute;
+}
+
+
+#monitor-site-info {
+    width: 300px;
+    font-family: Arial, Sans-Serif;
+}
+
+.photo {
+    float:left;
+    padding: 2px;
+    margin: 2px;
+    border: solid 1px grey;
+}
+
+img.thumbnail {
+    width:75px;
+    height:75px;
+}
+
+img.flickrpreload {
+    width:0px;
+    height:0px;
+}
+
+.photo time {
+    display:block;
+    font-size:0.7em;
+}
+
+table.site-listing {
+    margin-bottom : 220px; /* For Expanding images */
+    margin-top : 10px;
+    border : 2px solid grey;
+    float: left;
+    margin-left : 10px;   
+}
+
+table.site-listing th {
+    padding-left: 4px;
+    padding-top: 2px;
+}
+
+table.site-listing td {
+    padding-left: 4px;
+}
+
+.site-listing a {
+    font-size : 0.75em;
+}
+
+html body div.body-wrap 
+{
+    width: 1050px;
+}
+
+html body div.col-med {
+	width: 1030px;
+	border: 5px solid #6A801A;
+	border-radius : 5px;
+	background:white;
+}
+​
+    </style>	
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+<!-- BEGIN Header -->
+<div class="header-wrap">
+	<div class="header">
+		<a name="pageTop"></a>
+		<ul class="nav">
+			<li><a href="/index.html"><span>HOME</span></a></li>
+			<li><a href="/people.html"><span>PEOPLE</span></a></li>
+			<li class="current"><a href="/blog.html"><span>BLOG</span></a></li>
+			<li><a href="/contact.html"><span>CONTACT</span></a></li>
+		</ul>
+		<h2>Kakariki</h2>
+	</div>
+</div>
+<!-- BEGIN Body -->
+<div class="body-bg">
+	<div class="body-wrap">
+		<div class="body-pad">
+			<!-- <p class="intro"><em>Our blog.</em> We live and breathe this stuff. Here we write musings on the subjects that matter.</p> -->
+			<div class="col-med bc">
+					<div class="col-content">
+						<h1>Motuihe Monitoring</h1>
+						<p class="date">Saturday March 10th 2012</p>
+						<div class="sep"></div>
+
+<!--- ------------------------------------ -->
+<img id="floating-image" src="" />
+        <p>
+            The Motuihe Island Restoration Trust volunteers restoring Motuihe Island 
+            are also monitoring bird, plant, insect and reptile populations. 
+            This monitoring has enabled the Trust to collect baseline data of the 
+            plants and animals on the island early in it’s progress from poor quality 
+            farm land to native bush. There are plans in place to regularly re-sample 
+            all this data to enable the tracking of progress and the changing mix of 
+            species as the island is reforested. 
+            (<a href="http://www.motuihe.org.nz/motuihe/content.aspx?pageId=41">See the summary of the report</a>)
+        </p>
+        <noscript>
+            <p>
+            Unfortunatly this map needs javascript enabled to run and you have it disabled for this site.
+            </p>
+        </noscript>
+        <div id="map-canvas">
+            <p>Well that did not work. Either you have javascript disabled (there will be a message above) or something has gone wrong.</p>
+        </div>
+        <table class="site-listing">
+            <thead>
+                <tr>
+                    <th>On Map</th>
+                    <th>2006</th>
+                    <th>2007</th>
+                    <th>2011</th>
+                    <th>2012</th>
+                    <th>2014</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-site="1">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 1</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="2">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 2</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="3">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 3</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="4">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 4</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="5">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 5</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="6">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 6</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="7">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 7</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="8">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 8</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="9">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 9</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="10">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 10</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="11">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 11</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="12">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 12</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="13">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 13</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="14">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 14</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="15">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 15</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="16">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 16</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="17">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 17</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="18">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 18</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="19">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 19</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="20">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 20</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="site-listing">
+            <thead>
+                <tr>
+                    <th>On Map</th>
+                    <th>2006</th>
+                    <th>2007</th>
+                    <th>2011</th>
+                    <th>2012</th>
+                    <th>2014</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-site="21">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 21</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="22">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 22</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="23">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 23</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="24">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 24</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="25">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 25</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="26">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 26</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="27">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 27</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="28">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 28</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="29">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 29</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="30">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 30</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="31">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 31</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="32">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 32</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="33">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 33</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="34">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 34</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="35">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 35</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="36">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 36</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="37">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 37</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="38">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 38</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="39">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 39</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+                <tr data-site="40">
+                    <td><a href="javascript:void(0)" onclick="showDataSite(this); return false;">Map Site 40</a></td>
+                    <td data-year="2006" class="photoHolder"></td>
+                    <td data-year="2007" class="photoHolder"></td>
+                    <td data-year="2011" class="photoHolder"></td>
+                    <td data-year="2012" class="photoHolder"></td>
+                    <td data-year="2014" class="photoHolder"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="clear:left">
+        The volunteers of The Trust are restoring Motuihe Island, in Auckland’s Hauraki Gulf. They have launched into an ambitious program of pest control, weed control, reforestation (to the tune of 50,000 trees planted a year), and reintroduction of native wildlife. Working with a  host of partners, Trust volunteers have reintroduced endangered native birds including kiwi, saddleback, bellbird and kakariki.
+        </p>
+        <p>
+            To enable accurate and consistent monitoring, 40 monitoring sites have been 
+            set up over the island. The sites have been placed in a mixture of environments, 
+            swamp, pasture, bush and beach. At each of these GPS’ed monitoring stations there is:
+            <ul>
+                <li>One bird observation point, for 5 minute bird counts.</li>
+                <li>Two vegetation monitoring points, separated by 40 metres, to catalogue the size and species of all vegetation found.</li>
+                <li>One reptile habitat, to track the change in skink and lizard populations.</li>
+                <li>Two invertebrate monitoring site, separated by 20 metres, to catalog the different insect species found</li>
+            </ul>
+        </p>
+
+        <p>            
+            While carrying out this monitoring as a volunteer for the Trust I thought it would also be a good way to establish a visual record of the change occurring on the island. I started taking pictures at every monitoring station I went to, all the pictures were taken facing north at the same zoom level (18mm with 1.5 crop ratio giving 27mm as 35mm equivalent, for those that worry about such things). On a recent visit (November 2011) I managed to get round all 40 sites in one weekend, again taking pictures at each site.
+        </p>
+        <p>
+            So now with most sites having 2 or 3 pictures I can start to share the progress the Island has made, the map above has each monitoring spot marked on it, clicking on these spots will bring up the photos taken at these spots, if you move your mouse over the photos you will get a bigger version of the photo.
+        </p>
+<!--- ------------------------------------ -->
+
+
+
+
+
+
+
+
+
+                        
+                        <p>
+                            David Waters<br />
+                            www.kakariki.co.uk.
+                        </p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="clear"></div>
+</div>  <!-- CLOSE body-bg -->
+<div class="footer-wrap">
+	<div class="footer">
+		<p class="floatRight">Contact: <a href="mailto:david.waters@kakariki.co.uk">david.waters@kakariki.co.uk</a></p>
+		<p>Copyright &copy; Kakariki Ltd</p>
+	</div>
+</div>
+<script src='http://code.jquery.com/jquery-1.7.1.js'></script>
+<script src="MotuiheMap.js"></script>
+<script src='http://www.google-analytics.com/ga.js'></script>
+
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-15440154-1");
+        pageTracker._trackPageview();
+    } catch (err) { }</script>
+</body>
+</body>
+</html>

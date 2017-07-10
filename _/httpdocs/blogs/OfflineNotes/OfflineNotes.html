@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Offline Notes</title>
+		<link rel="stylesheet" href="css/main.css" />
+	</head>
+	<body>
+		<h1>Offline notes</h1>
+		<div id="commands">
+			<ul>
+				<li><button id="new">New</button></li>
+				<li><button id="save">Save</button></li>
+				<li><button id="delete">Delete</button></li>
+				<li><button id="reload">Reload</button></li>
+				<li><button id="clear">Clear All</button></li>
+			</ul>
+		</div>
+		
+		<nav>
+			<ul id="documentlist">
+			</ul>
+		</nav>
+		
+		<div id="form">
+			<input type="text" value="" id="title"/>
+			
+			<textarea id="currentdoc">
+			</textarea>
+		</div>
+		
+		<script src="javascript/jquery-1.6.2.min.js" ></script>
+		<script src="javascript/offlineNotes.js" ></script>
+	</body>
+</html>
