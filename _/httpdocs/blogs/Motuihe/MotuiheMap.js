@@ -9,7 +9,7 @@ var flickrRequestsSent = 0;
 var flickrRequestsRecived = 0;
 
 function createFlickrUrl(info, size) {
-    return "http://farm" + info.farmId +
+    return "https://farm" + info.farmId +
                           ".static.flickr.com/" + info.serverId +
                           "/" + info.photoId + "_" +
                           info.secret + size +".jpg";
@@ -22,13 +22,13 @@ function hideZoomImageNow() {
 }
 
 function initialize() {
-   var mapDiv = document.getElementById('map-canvas');
-   map = new google.maps.Map(mapDiv, {
+    var mapDiv = document.getElementById('map-canvas');
+    map = new google.maps.Map(mapDiv, {
        center: new  google.maps.LatLng(-36.812, 174.945),
        zoom: 15,
        mapTypeId: google.maps.MapTypeId.SATELLITE
-   });
-   infoWindow = new google.maps.InfoWindow({'content':'Does Not Display'});
+    });
+    infoWindow = new google.maps.InfoWindow({'content':'Does Not Display'});
     $("#floating-image").mouseleave( function(evt){
         $(evt.target)
             .stop()
@@ -190,7 +190,8 @@ function clearMonitoringSites() {
 
 function showAllMonitoringSites() {
     for(index in monitoringSites) {
-        monitoringSites[index].showMarker();
+        var site = monitoringSites[index]
+        site.showMarker();
     }    
 }
 
@@ -255,14 +256,20 @@ function showDataSite(anchor) {
     $("div#map-canvas").scrollTo();
 }
 
-function populatePhotoCell(cell) {
+function populatePhotoCell(cell, loggedSites) {
     var siteNumber = parseInt($(cell.parent()).data('site'));
     var year = cell.data('year');
     var site = monitoringSites[siteNumber -1];
     site.whenFlickrInfoLoaded( function () {
+        if(console) {
+            if(!loggedSites[siteNumber]) {
+                //console.info(site); good spot for debugging or generating hardcoded image urls
+                loggedSites[siteNumber] = true;
+            }
+        }
         for(var i=0; i < site.flickrInfo.length; i++) {
             var flickr = site.flickrInfo[i];
-            // Scipt over photos taken other years.
+            // Skip over photos taken other years.
             if (flickr.date.indexOf(year + "") != 0) {
                 continue;
             }
@@ -273,8 +280,9 @@ function populatePhotoCell(cell) {
 }
 
 function populatePhotoTable() {
+    var loggedSites = [];
     $("table.site-listing td.photoHolder").each( function () {
-        populatePhotoCell($(this));
+        populatePhotoCell($(this), loggedSites);
     });
 }
     
