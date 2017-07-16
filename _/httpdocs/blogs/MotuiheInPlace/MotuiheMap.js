@@ -123,7 +123,7 @@ function photoHover() {
             var self = this;
             $.each(this.flickrInfo,
                 function(index, info){
-                    str += self._getSinglePhotoContent(info);
+                    str += self._getSinglePhotoContent(info, self);
                 });
             str += '</div>';
             return str;   
@@ -131,6 +131,7 @@ function photoHover() {
             
         this._getSinglePhotoContent = function(info, site) {
            if(!('url' in info)) debugger;
+           if((!site) || !site.number) debugger;
            var str =
             '<div class="photo" data-site="'+site.number+'">' +
                 '<a href="' + info.url + '" target="_blank">' +
