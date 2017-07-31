@@ -49,43 +49,43 @@ function photoHover() {
     var url = smallUrl.replace("_s.jpg",".jpg");
     
     var siteNumber = this.dataset.site;
-    var allPlaceholders = $('img.inactivesummary');
+    var targetId = 'display-site-' + siteNumber;
+    var allPlaceholders = $('img.inactivesummary:not(img#' +targetId+')');
+    var targetPlaceholder = $('img#' +targetId);
+    var expandedPlaceholders = $('img.inactivesummary[width="500px"]');
+    //if(expandedPlaceholders.length != 1 || expandedPlaceholders[0].id != targetId)
     // Hide all existing placeholders soon
-    allPlaceholders
+    var hidingAnimations = allPlaceholders
         .stop()
         .animate({},100)
-        .animate({width:0, height:0}, 250);
+        .animate({width:0, height:0}, 250)
+        .promise();
+
+    hidingAnimations.done(function(nope) {
+        // Show the relavent placeholder
+        targetPlaceholder
+            .stop()
+            .attr('src', smallUrl) // Ensure correct image while loading.
+            .attr('src', url)
+            .animate({
+                width:'500px',
+                height:'325px'
+                },250);
+    });
+}
+
+function mapPhotoHover() {
+    var smallUrl = $("img",this).attr("src");
+    var url = smallUrl.replace("_s.jpg",".jpg");
+    
+    var siteNumber = this.dataset.site;
 
     // Show the relavent placeholder
     var placeholder = $('img#display-site-' + siteNumber);
     placeholder
         .stop()
         .attr('src', smallUrl) // Ensure correct image while loading.
-        .attr('src', url)
-        .animate({
-            width:500,
-            height:325
-            },250);
-
-
-    var offset = $(this).offset();
-/*
-    $("#floating-image")
-        .stop()
-        .attr('src', smallUrl) // Ensure correct image while loading.
-        .attr('src', url)
-        .height(0)
-        .width(0)
-        .css("display", "inline")
-        .offset(offset)
-        .height(75)
-        .width(75)
-        .css("z-index", 500)
-        
-        .animate({
-            width:500,
-            height:325
-            },250); */
+        .attr('src', url);
 }
 
     function monitoringSite(number, latitude, longitude, flickrPhotoIds) {
@@ -113,20 +113,30 @@ function photoHover() {
                  '<p>' +
                   'Site ' + this.number +'.' +
                  '</p>' +
-                 this._getAllPhotoContent() +
+                 this._getAllPhotoContentForMap() +
                 '</div>';
             return ret;
         }
             
-        this._getAllPhotoContent = function() {
+        this._getAllPhotoContentForMap = function() {
             var str = '<div class="photos">';
             var self = this;
             $.each(this.flickrInfo,
                 function(index, info){
-                    str += self._getSinglePhotoContent(info, self);
+                    str += self._getSinglePhotoContentForMap(info, self);
                 });
-            str += '</div>';
+
+            str += '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA" '+
+                    'id="display-site-' + this.number + '" class="mapLargeImage"/>';
+                '</div>';
             return str;   
+        }
+
+        this._getSinglePhotoContentForMap = function(info, site) {
+            return '<div class="photo map-photo" data-site="'+site.number+'">' +
+                     '<img class="hiddenPhoto" src="' + info.thumbNail +'"/>' +
+                     '<time datetime="' + info.date + '">' + info.date.substring(0,7) + '</time>' +
+                '</div>';
         }
             
         this._getSinglePhotoContent = function(info, site) {
@@ -193,11 +203,16 @@ function photoHover() {
             infoWindow.setContent(content);
             infoWindow.open(map,this.__marker);
             infoWindow.setContent(content);
-            $('div.photo').hover(photoHover,
+
+            $('div.photo').hover(mapPhotoHover,
                 function() {
                     
                 }
             );
+
+            var firstLabel =  $('div.map-photo[data-site='+this.number+']')[0];
+            mapPhotoHover.call(firstLabel); // Do the hover action on the first photo label.
+
         }
             
         google.maps.event.addListener(this.__marker, 'click', function() {
