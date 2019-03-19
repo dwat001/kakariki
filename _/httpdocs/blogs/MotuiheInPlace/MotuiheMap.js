@@ -352,6 +352,11 @@ function populatePhotoRow(row, loggedSites) {
             tableDateHover(site, siteNumber, event);
         };
         datesCell.children('.table-date-label').hover(hoverFunction, function(){/* Empty Mouse Out */});
+
+        // Load First Image
+        var fakeEvent = {};
+        fakeEvent.target = datesCell.children('.table-date-label')[0];
+        tableDateHover(site, siteNumber, fakeEvent);
     });
 }
 
