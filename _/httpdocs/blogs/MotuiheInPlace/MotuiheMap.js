@@ -138,6 +138,12 @@ function mapPhotoHover() {
                      '<time datetime="' + info.date + '">' + info.date.substring(0,7) + '</time>' +
                 '</div>';
         }
+
+        this._getSinglePhotoLabelForTable = function(info, site, infoIndex) {
+            return '<div class="table-date-label" data-site="'+site.number+'" data-infoIndex="'+ infoIndex +'">' +
+                     '<time datetime="' + info.date + '">' + info.date.substring(0,7) + '</time>' +
+                '</div>';
+        }
             
         this._getSinglePhotoContent = function(info, site) {
            if(!('url' in info)) debugger;
@@ -206,7 +212,7 @@ function mapPhotoHover() {
 
             $('div.photo').hover(mapPhotoHover,
                 function() {
-                    
+                    // out
                 }
             );
 
@@ -320,8 +326,49 @@ function populatePhotoCell(cell, loggedSites) {
     });
 }
 
-function populateRows(dataRow) {
+function populatePhotoRow(row, loggedSites) {
+    var siteNumber = parseInt(row.data('site'));
+    //var year = cell.data('year');
+    var site = monitoringSites[siteNumber -1];
+    if(!site) debugger;
 
+    site.whenFlickrInfoLoaded( function () {
+        if(console) {
+            if(!loggedSites[siteNumber]) {
+                //console.info(site); good spot for debugging or generating hardcoded image urls
+                loggedSites[siteNumber] = true;
+            }
+        }
+        var datesCell = row.children('td.dates');
+        if(datesCell) {
+            for(var i=0; i < site.flickrInfo.length; i++) {
+                var flickr = site.flickrInfo[i];
+                
+                datesCell.append(site._getSinglePhotoLabelForTable(flickr, site, i));
+            }
+        }
+
+        var hoverFunction = function(event) {
+            tableDateHover(site, siteNumber, event);
+        };
+        datesCell.children('.table-date-label').hover(hoverFunction, function(){/* Empty Mouse Out */});
+    });
+}
+
+function tableDateHover(site, siteNumber, event) {
+    var dateLabel = $(event.target);
+    var image = dateLabel.parent().parent().find("td.large-cell-photo img")
+    var infoIndex = dateLabel.data().infoindex >> 0;
+    var info = site.flickrInfo[infoIndex];
+    var imageUrl = info.largePic;
+    image.attr('src', imageUrl);
+}
+
+function populateRows() {
+    var loggedSites = [];
+    $("table.site-listing tr[data-site]").each( function () {
+        populatePhotoRow($(this), loggedSites);
+    });
 }
 
 function populatePhotoTable() {
@@ -347,6 +394,7 @@ $(function () {
     createMonitoringSites();
     showAllMonitoringSites();
     populatePhotoTable();
+    populateRows();
     var site = monitoringSites[17 -1];
     site.whenFlickrInfoLoaded( function () {
         showMonitoringSite(17);
