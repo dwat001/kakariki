@@ -7,6 +7,7 @@ var flickrSizeSmall = "_s";
 var flickrSizeBig = "";
 var flickrRequestsSent = 0;
 var flickrRequestsRecived = 0;
+var newflickrData = {}
 
 function createFlickrUrl(info, size) {
     return "https://farm" + info.farmId +
@@ -176,30 +177,41 @@ function mapPhotoHover() {
                 if(!photoId) {
                     return;
                 }
-                self.flickrDeferreds.push(
-                    $.getJSON("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + flickrApiKey +
-                          "&photo_id=" + photoId +
-                          "&format=json&jsoncallback=?",
-                  function(data){
-                      if(!data.photo) {
-                      	  console.error(index + ' ' + photoId);
-                      	  console.error(data);
-                          a.Error();
-                      }
-                      var info = {
-                          "farmId" : data.photo.farm,
-                          "serverId" : data.photo.server,
-                          "photoId" : data.photo.id,
-                          "secret" : data.photo.secret,
-                          "url" : data.photo.urls.url[0]._content,
-                          "date" : data.photo.dates.taken,
-                          };
-                      info.thumbNail = createFlickrUrl(info, flickrSizeSmall);
-                      info.largePic = createFlickrUrl(info, flickrSizeBig);
-                      //self.flickrInfo.push(info);
-                      self.flickrInfo[index] = info;
-                      flickrRequestsRecived++;
-                  }));
+                var storeData = function(info){
+                  self.flickrInfo[index] = info;
+                  flickrRequestsRecived++;
+                };
+
+                if(flickrData[photoId]) {
+                    storeData(flickrData[photoId])
+                } else {                
+                    self.flickrDeferreds.push(
+                        $.getJSON("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + flickrApiKey +
+                              "&photo_id=" + photoId +
+                              "&format=json&jsoncallback=?",
+                              function(data) {
+                                if(!data.photo) {
+                                  console.error(index + ' ' + photoId);
+                                  console.error(data);
+                                  a.Error();
+                                  }
+                                  var info = {
+                                      "siteNumber" : self.number,
+                                      "photoIndex" : index,
+                                      "photoId" : data.photo.id,
+                                      "farmId" : data.photo.farm,
+                                      "serverId" : data.photo.server,
+                                      "secret" : data.photo.secret,
+                                      "url" : data.photo.urls.url[0]._content,
+                                      "date" : data.photo.dates.taken,
+                                      };
+                                  info.thumbNail = createFlickrUrl(info, flickrSizeSmall);
+                                  info.largePic = createFlickrUrl(info, flickrSizeBig);
+                                  newflickrData[photoId] = info
+                                  storeData(info);
+                              }
+                      ));
+                }
             });
         }
         
