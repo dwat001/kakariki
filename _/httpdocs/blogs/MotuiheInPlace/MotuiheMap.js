@@ -394,6 +394,21 @@ function populatePhotoTable() {
         populatePhotoCell($(this), loggedSites);
     });
 }
+
+function preloadPhotos() {
+    var preloadImages = [];
+    monitoringSites.forEach(
+        function(site, siteIndex) {
+            site.whenFlickrInfoLoaded( function() {
+                site.flickrInfo.forEach(function (pictureInfo, pictureIndex){
+                    var image = new Image();
+                    image.src = pictureInfo.largePic;
+                    preloadImages.push(image);
+                });
+            });
+        }
+    );
+}
     
     
 (function($) {
@@ -412,6 +427,7 @@ $(function () {
     showAllMonitoringSites();
     populatePhotoTable();
     populateRows();
+    setTimeout(preloadPhotos, 1000);
 
     /*
     var site = monitoringSites[17 -1];
