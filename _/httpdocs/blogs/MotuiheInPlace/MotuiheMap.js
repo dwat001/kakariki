@@ -4,6 +4,7 @@ var infoWindow;
 var monitoringSites;
 var flickrApiKey = "be89187acf4ec53720aeb23305808ab5";
 var flickrSizeSmall = "_s";
+var flickrSizeOriginal = "_b";
 var flickrSizeBig = "";
 var flickrRequestsSent = 0;
 var flickrRequestsRecived = 0;
@@ -207,6 +208,7 @@ function mapPhotoHover() {
                                       };
                                   info.thumbNail = createFlickrUrl(info, flickrSizeSmall);
                                   info.largePic = createFlickrUrl(info, flickrSizeBig);
+                                  info.originalPic = createFlickrUrl(info, flickrSizeOriginal);
                                   newflickrData[photoId] = info
                                   storeData(info);
                               }

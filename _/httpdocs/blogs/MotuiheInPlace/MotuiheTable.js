@@ -69,8 +69,17 @@
 		image.src = photoInfo.largePic;
 
 		var dateSpan = document.createElement("div");
-		var date = document.createTextNode("Site " + photoInfo.siteNumber + " - " + photoInfo.date.substr(0, 7));
+		var date = document.createTextNode("Site " + photoInfo.siteNumber + " - " + photoInfo.date.substr(0, 7) + " - ");
+		var download = document.createElement("a");
+		download.href = photoInfo.originalPic;
+		download.target = "_blank";
+		//download.download = "Motuihe_Site_" + photoInfo.siteNumber + "_" + photoInfo.date.substr(0, 7)
+		download.appendChild(
+			document.createTextNode("download")
+			);
+
 		dateSpan.appendChild(date);
+		dateSpan.appendChild(download);
 
 		td.appendChild(dateSpan);
 		td.appendChild(image);
