@@ -70,11 +70,15 @@
 	var createPhotoTable = function(sites) {
 		var table = document.createElement("table");
 		var header = document.createElement("tr");
+
+		var th = document.createElement("th");
+		th.appendChild(document.createTextNode("Site/Year"));
+		header.appendChild(th);
 		
 		for(var siteIndex = 1; siteIndex < 41; siteIndex++) {
-			var th = document.createElement("th");
-			th.appendChild(document.createTextNode("Site " + siteIndex));
-			header.appendChild(th);
+			var siteHeader = document.createElement("th");
+			siteHeader.appendChild(document.createTextNode("Site " + siteIndex));
+			header.appendChild(siteHeader);
 		}
 		table.appendChild(header);
 
