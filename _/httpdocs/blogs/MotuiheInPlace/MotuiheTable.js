@@ -33,7 +33,6 @@
 			if(photoInfo) {
 				photoFound = true;
 				td = createPhotoTd(photoInfo);
-
 			} else {
 				td = document.createElement("td");
 			}
@@ -57,14 +56,6 @@
 				table.appendChild(tr);
 			}
 		}
-
-/*
-		var tempRow = document.createElement("tr");
-		table.appendChild(tempRow);
-		for(photoIndex in sites[1].photos) {
-			tempRow.appendChild(createPhotoTd(sites[1].photos[photoIndex]));
-		}
-*/
 		return table;
 	}
 
