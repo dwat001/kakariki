@@ -1,5 +1,68 @@
 "use strict";
+
+// Polyfill array.includes from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes#Polyfill
+if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, 'includes', {
+    value: function(valueToFind, fromIndex) {
+
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      // 1. Let O be ? ToObject(this value).
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If len is 0, return false.
+      if (len === 0) {
+        return false;
+      }
+
+      // 4. Let n be ? ToInteger(fromIndex).
+      //    (If fromIndex is undefined, this step produces the value 0.)
+      var n = fromIndex | 0;
+
+      // 5. If n ≥ 0, then
+      //  a. Let k be n.
+      // 6. Else n < 0,
+      //  a. Let k be len + n.
+      //  b. If k < 0, let k be 0.
+      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+      function sameValueZero(x, y) {
+        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+      }
+
+      // 7. Repeat, while k < len
+      while (k < len) {
+        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+        // b. If SameValueZero(valueToFind, elementK) is true, return true.
+        if (sameValueZero(o[k], valueToFind)) {
+          return true;
+        }
+        // c. Increase k by 1. 
+        k++;
+      }
+
+      // 8. Return false
+      return false;
+    }
+  });
+}
+
+
 (function() {
+
+	var years = [
+		{label:"2006/2007", years:["2006","2007"]},
+		{label:"2011", years:["2011"]},
+		{label:"2012", years:["2012"]},
+		{label:"2014", years:["2014"]},
+		{label:"2017", years:["2017"]},
+		{label:"2019", years:["2019"]},
+	];
 
 	var compareSite = function(a, b) {
 		if(a.date > b.date) {
@@ -27,38 +90,51 @@
 		return sitesTemp;
 	};
 
-	var createPhotoRow = function(photoIndex, sites) {
-		var photoFound = false;
+	var getPhotoForYear = function (year, photos) {
+		for(var index=0; index<photos.length; index++) {
+			if(year.years.includes(photos[index].date.substr(0, 4))){
+				return photos[index];
+			}
+		}
+		return null;
+	}
+
+	var createPhotoYearRow = function(year, sites) {
 		var tr = document.createElement("tr");
+
+		var yearHeader = document.createElement("th");
+		yearHeader.appendChild(document.createTextNode(year.label));
+
+		tr.appendChild(yearHeader);
+
 		for(var siteIndex = 1; siteIndex < 41; siteIndex++) {
 			var td = null;
-			var photoInfo = sites[siteIndex].photos[photoIndex];
+			var photoInfo = getPhotoForYear(year, sites[siteIndex].photos)
 			if(photoInfo) {
-				photoFound = true;
 				td = createPhotoTd(photoInfo);
 			} else {
 				td = document.createElement("td");
 			}
 			tr.appendChild(td);
 		}
-		if(photoFound) {
-			return tr;
-		} else {
-			return null;
-		}
+		return tr;
 	}
 
 	var createPhotoTable = function(sites) {
 		var table = document.createElement("table");
-
-		var workDone = true;
-		for(var photoIndex=0; workDone; photoIndex++) {
-			var tr = createPhotoRow(photoIndex, sites);
-			workDone = tr != null;
-			if(tr) {
-				table.appendChild(tr);
-			}
+		var header = document.createElement("tr");
+		
+		for(var siteIndex = 1; siteIndex < 41; siteIndex++) {
+			var th = document.createElement("th");
+			th.appendChild(document.createTextNode("Site " + siteIndex));
+			header.appendChild(th);
 		}
+		table.appendChild(header);
+
+		years.forEach(function(year, index) {
+			table.appendChild(createPhotoYearRow(year, sites));
+		});
+
 		return table;
 	}
 
